@@ -45,7 +45,7 @@
         #content div{
             display: none;
         }
-        #content .selected{
+        #content #selected{
             display: block;
         }
     </style>
@@ -59,7 +59,7 @@
             <li>娱乐</li>
         </ul>
         <div id="content">
-            <div class="selected">事实1111</div>
+            <div id="selected">事实1111</div>
             <div>体育</div>
             <div>娱乐</div>
         </div>
@@ -86,11 +86,11 @@
                 // 把所有li的className 清空
                 for(var j=0; j<aLi.length ; j++){
                     aLi[j].className = "";
-                    aDiv[j].className="";
+                    aDiv[j].id="";
                 }
                 // 点击的li添加className
                 this.className = "active";
-                aDiv[this.index].className="selected";
+                aDiv[this.index].id="selected";
             }
         }
 
