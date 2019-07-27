@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #small-box,
+        #big-box {
+            width: 400px;
+            height: 400px;
+            float: left;
+            overflow: hidden;
+
+
+        }
+
+        #small-box {
+            position: relative;
+
+        }
+
+        #drag {
+            width: 200px;
+            height: 200px;
+            left: 0;
+            top: 0;
+            background: rgba(255, 255, 255, 0.5);
+            position: absolute;
+            display: none;
+        }
+
+        #big-box {
+            display: none;
+            position: relative;
+        }
+        #big-img{
+            position: absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id=container>
+        <div id="small-box">
+            <img src="../img/1 copy.jpg" alt="">
+            <span id="drag"></span>
+        </div>
+        <div id="big-box">
+            <img id="big-img"src="../img/2 copy.jpg" alt="">
+        </div>
+    </div>
+    <script>
+        var oSmallbox = document.getElementById('small-box');
+        var oDrag = document.getElementById('drag');
+        var oBigbox = document.getElementById('big-box');
+        var oBigImg = document.getElementById('big-img');
+        oSmallbox.onmouseover = function () {
+            oDrag.style.display = "block";
+            oBigbox.style.display = "block";
+        }
+        oSmallbox.onmousemove = function (e) {
+
+            oDrag.style.left = e.clientX - oDrag.offsetWidth / 2 + "px";
+            oDrag.style.top = e.clientY - oDrag.offsetHeight / 2 + "px";
+            if (oDrag.offsetLeft < 0) {
+                oDrag.style.left = 0;
+
+            }
+            var MaxLeft = oSmallbox.offsetWidth - oDrag.offsetWidth;
+            if (oDrag.offsetLeft >= MaxLeft) {
+                oDrag.style.left = MaxLeft + "px";
+            }
+            if (oDrag.offsetTop < 0) {
+                oDrag.style.top = 0;
+
+            }
+            var MaxTop = oSmallbox.offsetHeight - oDrag.offsetHeight;
+            if (oDrag.offsetTop >= MaxTop) {
+                oDrag.style.top = MaxTop + "px";
+            }
+            var smallDis = oSmallbox.offsetWidth - oDrag.offsetWidth;
+            var bigDis = oBigImg.offsetWidth - oBigbox.offsetWidth;
+            var smallDisY = oSmallbox.offsetHeight - oDrag.offsetHeight;
+            var bigDisY = oBigImg.offsetHeight - oBigbox.offsetHeight;
+
+            var xPro = oDrag.offsetLeft / smallDis;
+            oBigImg.style.left = -bigDis * xPro + "px";
+
+            // 小图垂直方向的比例 * 大图的最大距离
+            oBigImg.style.top = -oDrag.offsetTop / smallDisY * bigDisY + "px";
+        }
+        oSmallbox.onmouseout = function () {
+            oDrag.style.display = "none";
+            oBigbox.style.display = "none";}
+
+    </script>
+
+
+        
+</body>
+
+</html>

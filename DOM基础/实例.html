@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            position: relative;
+        }
+
+        #box1 span,
+        #box2 span {
+            /* position:absolute; */
+            background: black;
+            color: white;
+            font-size: 16px;
+            display: block;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+            overflow: hidden;
+            border-bottom: 1px solid white;
+        }
+
+        #box1 ul,
+        #box2 ul {
+            display: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="container">
+        <div id="box1">
+            <span id="head1">管理区</span>
+            <ul id="content1">
+                <li>111</li>
+                <li>222</li>
+                <li>333</li>
+            </ul>
+        </div>
+        <div id="box2">
+            <span id="head2">交流区</span>
+            <ul id="content2">
+                <li>1112</li>
+                <li>2222</li>
+                <li>3334</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var oHead1 = document.getElementById('head1');
+        var oHead2 = document.getElementById('head2');
+        var oContent1 = document.getElementById('content1');
+        var oContent2 = document.getElementById('content2');
+        oHead1.onclick= function () {
+            if (oContent1.style.display == "none") {
+                oContent1.style.display = "block";
+            }
+            else
+                oContent1.style.display = "none";
+            
+        }
+        oHead2.onclick = function () {
+            if (oContent2.style.display == "none") {
+                oContent2.style.display = "block";
+            }
+            else
+                oContent2.style.display = "none";
+            
+        }
+
+
+
+    </script>
+</body>
+
+</html>

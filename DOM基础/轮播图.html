@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+       #container {
+            position: relative;
+            margin: 100px auto;
+            width: 750px;
+            height: 291px;
+        }
+
+        ul {
+
+            list-style: none;
+
+        }
+
+        .box {
+            float: right;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .box2 {
+            float: left;
+            position: absolute;
+            left: 10px;
+            bottom: 10px
+        }
+
+        .box2 li,
+        .box li {
+            float: left;
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            color: white;
+            font-size: 14px;
+
+            background: rgba(0, 0, 0, 0.5);
+            margin-right: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .box .list {
+            background: red;
+        }
+        
+
+        .box1 div {
+            display: none;
+        }
+
+        .box1 .list1 {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <ul class="box">
+
+            <li class="list">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+
+        </ul>
+        <ul class="box2">
+            <li class="list2">&lt</li>
+            <li class="list3">&gt</li>
+        </ul>
+        <div class="box1">
+            <div class="list1"><img src="../img/1.jpg" /></div>
+            <div><img src="../img/2.jpg" /></div>
+            <div><img src="../img/3.jpg" /></div>
+            <div><img src="../img/4.jpg" /></div>
+            <div><img src="../img/5.jpg" /></div>
+        </div>
+
+
+    </div>
+    <script>
+        var oContainer = document.getElementById('container');
+        var oUl = document.getElementsByClassName('box')[0];
+        var aLi = oUl.getElementsByTagName('li');
+        var oEl = document.getElementsByClassName('box1')[0];
+        var aBi = oEl.getElementsByTagName('div');
+        var oVl = document.getElementsByClassName('list2')[0];
+        var oVi = document.getElementsByClassName('list3')[0];
+        
+        var inow = 0;
+        for (i = 0; i < aLi.length; i++) {
+            aLi[i].ind = i;
+
+            aLi[i].onclick = function () {
+                change(this.ind);
+                inow = this.ind;
+
+            } 
+        }
+
+        oVi.onclick = function () {
+            
+            inow++;
+            if (inow == aLi.length) {
+                inow = 0;
+            }
+            change(inow);
+            console.log(inow)
+
+        }
+        oVl.onclick = function () {
+            inow--;
+            if (inow == -1) {
+                inow = aLi.length - 1;
+            }
+            change(inow);
+        }
+        function change(index) {
+            for (i = 0; i < aLi.length; i++) {
+                aLi[i].className = "";
+                aBi[i].className = "";
+            }
+            aLi[index].className = "list";
+            aBi[index].className = "list1";
+        }
+        
+        var timer = setInterval(function(){
+            oVi.onclick();
+            console.log()
+        }, 1000);
+        oContainer.onmouseout = function () {
+            timer = setInterval(oVi.onclick, 1000);
+        }
+        oContainer.onmouseover = function () {
+            clearInterval(timer);
+        }
+    </script>
+
+</body>
+
+</html>
