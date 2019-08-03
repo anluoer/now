@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        h3 {
+            width: 960px;
+            height: 100px;
+            background-color: gray;
+            margin: 20px auto;
+            line-height: 60px;
+            text-align: center;
+
+
+
+        }
+
+        #box {
+            width: 960px;
+            height: 540px;
+            background: url(../img/01.jpg) 0px 0px no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            /* height:540px;
+            width:960px;
+            margin:0 auto; */
+
+        }
+
+        /* #big {
+            width: 960px;
+        } */
+
+        /* #middle,
+        #small {
+            display: none;
+        } */
+
+        #box1 {
+            width: 960px;
+            margin: 0 auto;
+            overflow: hidden;
+            background: red;
+        }
+
+        /* 多行文本垂直居中  
+    父元素display:table
+    子元素display:table-cell;
+        vertical-align:middle  */
+
+        #left {
+            float: left;
+            width: 630px;
+            height: 300px;
+            background: pink;
+            display: table;
+        }
+
+        #left p {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        #right {
+            float: right;
+            width: 300px;
+            height: 300px;
+            background: green;
+        }
+
+        @media screen and (max-width: 960px) {
+
+            h3 {
+                width: 100%;
+            }
+
+            #box {
+                width: 100%;
+                background-image: url(../img/01_s_2x.jpg);
+                height: 0px;
+                padding-top: 56%;
+                /* width: 100%;
+                /* height:0;  */
+                /* padding-top: 56%;
+             */
+            }
+
+            /* #small,
+            #big {
+                display: none;
+            }
+
+            #middle {
+                display: block;
+                width: 100%;
+
+            } */
+
+            #box1 {
+                width: 100%;
+            }
+
+            #left{
+                width: 66%;
+            }
+
+            #right {
+                width: 31%;
+            }
+
+
+        }
+
+        @media screen and (max-width: 480px) {
+            #box {
+                background-image: url(../img/01_s.jpg);
+            }
+
+            /* #big,
+            #middle {
+                display: none;
+            }
+
+            #small {
+                display: block;
+                width: 100%;
+            } */
+
+            
+
+            #left{
+                width: 100%;
+
+
+            }
+
+            #right {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h3>页头</h3>
+    <h3>标题</h3>
+    <div id="box">
+        <!-- <img id="big" src="../img/01.jpg">
+        <img id="middle" src="../img/01_s_2x.jpg">
+        <img id="small" src="../img/01_s.jpg"> -->
+    </div>
+    <div id="box1">
+        <div id="left">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sem erat, egestas quis luctus ut, rhoncus
+            vitae risus. Integer venenatis libero sit amet sapien dictum, quis bibendum mi volutpat. Cras pretium quam
+            quis magna facilisis, eget feugiat nisi lacinia.</p>
+        </div>
+        <div id="right"></div>
+
+    </div>
+
+    <h3>标题</h3>
+
+
+
+
+
+</body>
+
+</html>

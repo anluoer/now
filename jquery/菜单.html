@@ -58,27 +58,14 @@
         </div>
     </div>
     <script>
-        var oHead1 = document.getElementById('head1');
-        var oHead2 = document.getElementById('head2');
-        var oContent1 = document.getElementById('content1');
-        var oContent2 = document.getElementById('content2');
-        oHead1.onclick= function () {
-            if (oContent1.style.display == "none") {
-                oContent1.style.display = "block";
-            }
-            else
-                oContent1.style.display = "none";
-            
+    $('h2').on(click,function(){
+        if($(this).siblings('.last').is(':visible')){
+            $(this).siblings('.last').css('display','none');
+        }else{
+            $(this).siblings('.last').css('display','block');
         }
-        oHead2.onclick = function () {
-            if (oContent2.style.display == "none") {
-                oContent2.style.display = "block";
-            }
-            else
-                oContent2.style.display = "none";
-            
-        }
-
+    })
+       
 
 
     </script>
