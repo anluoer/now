@@ -1,8 +1,2 @@
-let b=1;
-console.log(b)
-const name="zs"
-console.log(name)
-
-let a = () =>{
-    
-}
+let a=1;
+console.log(a)
