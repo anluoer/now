@@ -96,72 +96,39 @@
 
 
     </div>
-    <!-- <script>
-        var oContainer = document.getElementById('container');
-        var oUl = document.getElementsByClassName('box')[0];
-        var aLi = oUl.getElementsByTagName('li');
-        var oEl = document.getElementsByClassName('box1')[0];
-        var aBi = oEl.getElementsByTagName('div');
-        var oVl = document.getElementsByClassName('list2')[0];
-        var oVi = document.getElementsByClassName('list3')[0];
-        
-        var inow = 0;
-        for (i = 0; i < aLi.length; i++) {
-            aLi[i].ind = i;
-
-            aLi[i].onclick = function () {
-                change(this.ind);
-                inow = this.ind;
-
-            } 
-        }
-
-        oVi.onclick = function () {
-            
-            inow++;
-            if (inow == aLi.length) {
-                inow = 0;
-            }
-            change(inow);
-            console.log(inow)
-
-        }
-        oVl.onclick = function () {
-            inow--;
-            if (inow == -1) {
-                inow = aLi.length - 1;
-            }
-            change(inow);
-        }
-        function change(index) {
-            for (i = 0; i < aLi.length; i++) {
-                aLi[i].className = "";
-                aBi[i].className = "";
-            }
-            aLi[index].className = "list";
-            aBi[index].className = "list1";
-        }
-        
-        var timer = setInterval(function(){
-            oVi.onclick();
-            console.log()
-        }, 1000);
-        oContainer.onmouseout = function () {
-            timer = setInterval(oVi.onclick, 1000);
-        }
-        oContainer.onmouseover = function () {
-            clearInterval(timer);
-        }
-    </script> -->
     <script src="jquery-1.12.4.js"></script>
     <script>
-        $('.box li').on('click', function () {
-            $(this).addClass('list').siblings().removeClass('list');
-            index = $(this).index;
-            $('.box1 div').eq($(this).index()).addClass('list1').siblings().removeClass('list1');
-        })</script>
+        var iNow=0;
+        $('.box li').on('click',function(){
+             $(this).addClass('list').siblings().removeClass('list');
+             var index=$(this).index;
+             $('.box1 div').eq($(this).index()).addClass('list1').siblings().removeClass('list1');
+             iNow = $(this).index();
+            })
+        $('.list3').on('click',function(){
+            iNow++;
+            if(iNow==$('.box li').size()){
+                iNow=0;
+            }
+            $('.box li').eq(iNow).addClass('list').siblings().removeClass('list');
+            $('.box1 div').eq(iNow).addClass('list1').siblings().removeClass('list1');
+        })
+        var timer=setInterval(function(){
+            $('.list3').trigger('click');
+        },1000);
+        $('#container').hover(function(){
+            clearInterval(timer);
+        },function(){
+            timer=setInterval(function(){
+                $('.list3').trigger('click');
+            },1000);
+        })  ;      
+    
+    
+    
+    </script>
 
-
+        
 </body>
 
 </html>
