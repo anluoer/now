@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="val in arr">{{val}}</li>
+        </ul>
+        <button @click="fn()">click</button>
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                arr:[1,2,3]
+            },
+            methods:{
+                fn(){
+                     Vue.set(this.arr,0,4)
+                }
+               
+            }
+        })
+        </script>
+</body>
+</html>

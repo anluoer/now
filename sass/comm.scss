@@ -1,0 +1,11 @@
+@mixin a($w,$h,$c){
+    width:$w;
+    height: $h;
+    border:1px solid $c
+}
+@mixin arrow($size:5px,$col) {
+    width: 0;
+    height: 0;
+    border: $size solid transparent;
+    border-top-color: $col;    
+}

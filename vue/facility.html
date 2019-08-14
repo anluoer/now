@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div>
+            是否需要额外付费设施
+            <input type="checkbox" v-model="isShow" @click="fn()" >
+            <ul v-show="isShow">
+                <li v-for="obj in list">
+                    {{obj.product}} ({{obj.price}})
+                    <input type="checkbox" :value="obj" v-model="list1"> 
+                </li>
+            </ul>
+        </div>
+        <div>
+            <p>订单费用信息</p>
+            <ul>
+                <li v-for="obj in list1">{{obj.product}} ({{obj.price}})</li>
+            </ul>
+
+
+        </div>
+        <div>总金额：{{total()}}</div>
+
+
+    </div>
+    <script src="vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    {
+                        product: "沙发",
+                        price: 100
+                    },
+                    {
+                        product: "wife",
+                        price: 50
+                    },
+                    {
+                        product: "电脑",
+                        price: 200
+                    }
+                ],
+                list1:[
+                    {
+                        product:"群里花园豪华型",
+                        price:"400"
+                    }
+                ],
+                isShow:false,
+            },
+                methods:{
+                    total(){
+                        let sum=0;
+                        this.list1.forEach(function(obj){
+                            sum+=obj.price*1;
+                        })
+                        return sum;
+                    },
+                    fn(){
+                        this.list1.splice(1);
+                    }
+                }
+               
+            
+        });
+
+
+
+    </script>
+</body>
+
+</html>

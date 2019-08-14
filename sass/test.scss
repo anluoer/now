@@ -1,0 +1,29 @@
+@import 'comm';
+$color:red;
+$color:orange !default;
+$atrr:width;
+$url:'1.jpg';
+
+body{
+    background-color: $color;
+    color:green;
+    #{$atrr}:300px;
+    #app{
+        p{
+        color:#000;
+        @include a(200px,300px,pink);
+        &:hover{
+            color:blue;
+        }
+
+    }
+    h5{
+        @extend p;
+    }
+    .arr{
+        @include arrow(10px,blue );
+       
+    }
+    }
+    
+}
