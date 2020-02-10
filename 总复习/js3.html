@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>11</li>
+        <li>22</li>
+        <li>33</li>
+    </ul>
+    <script>
+        var aLi=document.getElementsByTagName('li')
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].onclick=function(){
+                //因为定时器会在500ms以后自动调用函数，所以不能用apply,call,只能用
+                //bind只改变指向而不调用
+                setTimeout(function(){
+                    console.log(this)
+                }.bind(this),2000)
+            }
+        }
+        function fn(){
+            console.log(this)
+        }
+        fn()
+        var a={
+            name:"xiao"
+        }
+        var b={
+            name:"zs",
+            age:"12",
+            say:function(msg1,msg2){
+                console.log(this.name,msg1,msg2)
+            }
+        }
+        // b.say.call(a,"haha","hehe")
+        // b.say.apply(a,['haha','hehe'])
+        b.say.bind(a,"haah","hehe")()
+        setTimeout(function(){
+            console.log(this)
+        },500)
+        
+        //this指向 函数，定时器，对象，事件，类
+        //改变this指向的方法四种，箭头函数，call,apply,bind,其中bind只改变this指向而没有调用，需要手动调用
+
+    </script>
+</body>
+</html>

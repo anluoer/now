@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(a,b,...rest){//...rest取出剩余参数合成一个数组
+//console.log(arguments)//arguments能取到所有元素1，2，3，4为类数组形式
+//console.log(arguments.callee)//调用自己的函数
+console.log(rest);
+}
+fn(1,2,3,4)
+    </script>
+</body>
+</html>

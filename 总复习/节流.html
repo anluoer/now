@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Throter(fn,delay){
+            var startTime=0;
+            return function(){
+                // console.log(this)
+                var nowTime=Date.now()
+                //频繁触发时1000ms后才会调用一次fn
+                if(nowTime-startTime>delay){
+                    fn.call(this)
+                    startTime=nowTime
+                }
+            }
+        }
+        document.onmousemove=Throter(function(){
+            console.log(this)
+            console.log(Date.now())
+        },1000)
+    </script>
+</body>
+</html>

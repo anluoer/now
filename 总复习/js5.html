@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        #div2 {
+            width: 60px;
+            height: 60px;
+            background: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="div1" onclick="console.log('haha')"></div> -->
+    <div id="div1">
+        div1
+        <div id="div2">div2</div>
+    </div>
+    <a href="http:www.baidu.com" id="button">baidu</a>
+    <script>
+        //需要掌握的内容：事件源，this分别指什么；绑定事件的三种方法：在标签上绑定，.onclick,addEventListener(可重复绑定事件)
+        //事件冒泡和事件捕获
+        var oDiv1 = document.getElementById('div1')
+        var oDiv2 = document.getElementById('div2')
+        var oBtn = document.getElementById('button')
+        oDiv1.onclick = function (e) {
+            console.log('div1 click')
+        }
+        oDiv2.onclick = function (e) {
+            e=e||window.event
+            console.log('div2 click');
+            //阻止事件冒泡
+            e.stopPropagation()
+            e.cancelBubble=true
+        }
+        oBtn.onclick=function(e){
+            return false;
+            e.preventDefault();
+            e.returnValue=false;
+        }
+    </script>
+</body>
+
+</html>

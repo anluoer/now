@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function tho(fn,delay){
+            //每次进入定时器先将上一次的清除掉
+            timer=null;
+            return function(){
+                clearTimeout(timer)
+                timer=setTimeout(function(){
+                    fn()
+                }.bind(this),2000)
+            }
+            
+        }
+
+        document.onclick=tho(function(){
+            console.log('111'+Date.now())
+        })   
+        
+    </script>
+</body>
+</html>
