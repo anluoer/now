@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="qw"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+    //函数形式 无状态组件
+    // const Welcome=(props)=>{
+    //     return(
+    //          <div>
+    //         <h2>欢迎{props.name}</h2>
+    //         <p>{props.content}</p>
+    //     </div>
+    //     )
+       
+    // }
+    // ReactDOM.render(
+    // <Welcome name="zs" content="heihei"></Welcome>,
+    // document.getElementById('qw')
+    // )
+
+
+
+    //组件名首字母大写
+    //类形式 有状态组件
+    //props传来的值不能改
+    
+    
+    // class Welcome extends React.Component{
+    //     constructor(){
+    //     super();
+    //     this.state={
+    //         num:0
+    //     }
+    //     this.addHandle=this.addHandle.bind(this)
+    // }
+    
+    // addHandle(){
+    //     this.setState({
+    //         num:this.state.num+1
+    //     })
+    // }
+    // render(){
+    //         return(
+    //         <div>
+    //             <h2>{this.state.num}</h2>
+    //             <button onClick={this.addHandle}>add</button>
+    //         </div>
+    //         )
+    //     }
+    // }
+    // ReactDOM.render(
+    //     <Welcome></Welcome>,
+    //     document.getElementById('qw')
+
+    // )
+    //不要随便加分号
+    // class Welcome extends React.Component{
+    //     constructor(){
+    //         super();
+    //         this.state={
+    //             num:0
+    //         }
+    //         this.add=this.add.bind(this)
+    //     }
+    //     //setState中S大写
+    //     add(){
+    //         this.setState({
+    //             num:this.state.num+=1
+    //         })
+            
+    //     }
+    //     render(){
+    //         return(
+    //             <div>
+    //                 <h2>{this.state.num}</h2>
+    //                 <button onClick={this.add}>add</button>
+    //             </div>
+    //         )
+    //     }
+        
+    // }
+    class Main extends React.Component{
+        constructor(){
+            super();
+            this.state={
+                name:'zs'
+            }
+            this.change=this.change.bind(this)
+        }
+        change(val){
+            this.setState({
+                name:val
+            })
+            //注意书写
+        }
+        render(){
+            return(
+                <div>
+                    <h2>{this.state.name}</h2>
+                    <Children msg={this.state.name} change={this.change}></Children>
+                </div>
+            )
+        }
+    }
+    class Children extends React.Component{
+       
+        render(){
+            return(
+                <div>
+                    <h2>{this.props.msg}</h2>
+                    <button onClick={()=>{
+                        this.props.change('lisi')
+                    }}>change</button>
+                </div>
+            )
+        }
+    }
+    ReactDOM.render(
+            <Main></Main>,
+            document.getElementById('qw')
+
+        )
+
+
+    </script>
+</body>
+
+</html>

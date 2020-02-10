@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width:125px;
+            height:125px;
+            background: #000;
+            /* position:absolute;
+            left:-135px;
+            top:-135px; */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="next"></div>
+    </div>
+    <!-- 加载图片 ，先创建24张图片，将图片加载下来后将他们插入页面中-->
+    <script>
+        var count=0;
+        
+        var oContainer=document.getElementById('container')
+        var aBox=document.getElementsByClassName('box');
+        for(var i=0;i<24;i++){
+           var oImg=new Image() ;
+           oImg.src="img/thumbs/"+(i+1)+".jpg"
+           //将图片加载下来
+           oImg.onload=function(){
+                count++;
+                if(count==48){
+                    loadSuccess()
+                }
+           }
+        }
+        for(var i=0;i<24;i++){
+           var oImg=new Image() ;
+           oImg.src="img/"+(i+1)+".jpg"
+           //将图片加载下来
+           oImg.onload=function(){
+                count++;
+                if(count==48){
+                    loadSuccess()
+                }
+           }
+        }
+        //图片加载成功后放在容器中
+        function loadSuccess(){
+            //将图片放在div中
+            for(var i=0;i<4;i++){
+                for(var j=0;j<6;j++){
+                    var oDiv=document.createElement('div');
+                    oDiv.style.background = "url(img/thumbs/" + (i * 6 + j + 1) + ".jpg)";
+                    
+                    oDiv.className="box";
+                    oContainer.appendChild(oDiv);
+                }
+
+            }
+
+        var aBox=document.getElementsByClassName('box');
+        var oBoxWidth = aBox[0].offsetWidth;
+        var oBoxHeight = aBox[0].offsetHeight;
+        console.log(oBoxWidth)
+        
+        var disX=(container.offsetWidth-oBoxWidth*6)/7
+        var disY=(container.offsetHeight-oBoxHeight*4)/5
+        console.log(disX,disY)
+        //给这24个div定位
+        for(var i=0;i<aBox[i].length;i++){
+            aBox[i].style.left="";
+            aBox[i].style.top="";
+            
+        }
+        }
+
+       
+        // console.log(disX)
+
+
+
+
+        
+    </script>
+
+</body>
+</html>

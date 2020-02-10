@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <div id="qw"></div>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- 生产环境中不建议使用 -->
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+        <script type="text/babel">
+            class Main extends React.Component{
+                constructor(){
+                    super();
+                    this.state={
+                        num:100
+                    }
+                    this.del=this.del.bind(this)
+                }
+                del(val){
+                    this.setState({
+                        num:(this.state.num-(val*1))
+                    })
+                    
+                }
+                add(){
+                    this.setState({
+                        numb:this.state.numb+this.refs.name.value*1
+                    })
+                }
+                render(){
+                    return(
+                    <div>
+                    <h2>剩余将军数量 {this.state.num}</h2>
+                    <Children name="A"></Children>
+                    <Children name="B"></Children>
+                    </div>
+                    )
+                    
+                }
+            }
+            class Children extends React.Component{
+                
+                
+                render(){
+                    return(
+                        <div>
+                    <h2>将军A有士兵：{this.state.numb}</h2>
+                    <input type="text" ref="name"></input>
+                    <button onClick={()=>{
+                        this.props.msg(this.refs.name.value);
+                        this.add()
+                    }}>调兵</button>
+                    </div>
+                    )
+                    
+                }
+            }
+            class Children2 extends React.Component{
+                constructor(){
+                    super();
+                    this.state={
+                        num:100,
+                        // type:[A,B]
+                    }
+                }
+                render(){
+                    return(
+                        <div>
+                    <h2>将军B有士兵：{this.state.num}</h2>
+                    <input type="text" ref="num"></input>
+                    <button onClick={()=>{
+                        console.log(this.refs.num.value)
+                    }}>调兵</button>
+                    </div>
+                    )
+                    
+                }
+            }
+            
+            ReactDOM.render(
+                <Main></Main>,
+                document.getElementById('qw')
+            )
+        
+        
+        
+        </script>
+</body>
+</html>

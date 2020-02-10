@@ -1,0 +1,11 @@
+
+
+.App {
+  display:flex;
+}
+.Nav{
+  width:200px;
+}
+.header-box{
+  flex:1
+}

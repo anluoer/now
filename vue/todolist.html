@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+        margin:0;
+        padding:0
+        }
+        #app{
+            margin:0 auto;
+            text-align: center;
+        }
+        #inputList{
+            margin-bottom:30px;
+        }
+        #list{
+            border:1px solid #000;
+            width:100%;
+            border-collapse: collapse;
+        }
+        #listTitle{
+            border:1px solid #000000;
+            height:40px
+        }
+        #listTitleContent{
+            border:1px solid #000000;
+
+        }
+        .btn{
+            width:10px;
+            height:10px
+        }
+        .pink{
+            background: pink;
+        }
+        #allSelected{
+            float:right;
+            width:200px;
+            height:50px
+        }
+
+    </style>
+    
+</head>
+<body>
+    <div id="app">
+        <div id="title">
+            <h1>购物清单</h1>
+            <hr>
+        </div>
+        <div id="inputList">
+                <div id="search">
+                    <input type="text" placeholder="请输入商品" v-model="productSearch"> 
+                    <button @click="search">搜索</button>
+                </div>
+                <div id="name">
+                    <label for="productName">商品名称：</label>
+                    <input type="text" id="productName" v-model="name">
+                </div>
+                <div id="price">
+                    <label for="productPrice">商品价格：</label>
+                    <input type="text" id="productPrice" placeholder="0" v-model="price">
+                    <button @click="add">添加 </button>
+                </div>
+        </div>
+        <table id="list" border='1' cellspacing='0'>
+            <thead>
+                <tr id="listTitle">
+                    <td class="listTitleContent">选择</td>
+                    <td>商品名称</td>
+                    <td>商品价格</td>
+                    <td>删除</td>
+                </tr>
+            </thead>
+            <tbody>
+                <div >
+                   <tr v-for="(item,index) in productList" @click="change(item)"  :class="{pink:item.isSelected}" v-show="item.isShow">
+                        <td><input class="btn" type="checkbox" v-model="item.isSelected"></input></td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.price}}</td>
+                        <td><button class="btn" @click="del(index)"></button></td>
+                    </tr> 
+                </div>
+                
+            </tbody>
+            
+        </table>
+        <button id="allSelected" @click="all">删除选中</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            methods:{
+                change(item){
+                    item.isSelected=!item.isSelected
+                    // item.isSelected=!item.isSelected
+                },
+                add(){
+                    if(this.name&&this.price){
+                        this.productList.push({
+                            name:this.name,
+                            price:this.price,
+                            isSelected:false,
+                            isShow:true
+                        })
+                        this.name="";
+                        this.price=""
+                    } 
+                },
+                del(index){
+                    console.log('111')
+                    console.log(index)
+                    this.productList.splice(index,1)
+                },
+                all(){
+                    //把没选中的过滤出来显示
+                    arr=this.productList.filter(function(obj){
+                        return !obj.isSelected
+                    })
+                    this.productList=[...arr]
+                },
+                search(){
+                    
+                    //搜索数组中是否包含要搜索的内容,如果包含显示出来其余的隐藏
+                    this.productList.forEach((obj)=>{
+                        if(obj.name.includes(this.productSearch)){
+                            obj.isShow=true;
+                        }else{
+                            obj.isShow=false
+                        }
+                    })
+                }
+
+
+
+            },
+            data:{
+                productSearch:'',
+                name:'',
+                price:'',
+                productList:[
+                    {
+                        name:'苹果',
+                        price:'333',
+                        isSelected:true,
+                        isShow:true
+                    },
+                    {
+                        name:'葡萄',
+                        price:'222',
+                        isSelected:false,
+                        isShow:true
+
+                    },
+                    {
+                        name:'橘子',
+                        price:'111',
+                        isSelected:false,
+                        isShow:true
+
+                    }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

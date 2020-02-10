@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1 {
+            width: 100px;
+            height: 100px;
+            background: #000;
+            /* position:absolute; */
+            margin: 0 auto;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" >
+       <h2>{{fullname}}</h2>
+       <!-- <input type="text" @keyup.enter="change" > -->
+        
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        let vm=new Vue({
+            el:"#app",
+            data:{
+                aa:3,
+                flag:true,
+                msg:'111',
+                study:[
+                    {
+                        name:'zs',
+                        age:'21'
+                    },
+                    {
+                        name:'lisi',
+                        age:'22'
+                    }
+                ]
+            },
+            methods:{
+                change(){
+                        console.log(event.keyCode) 
+                }
+            },
+            computed:{
+                fullname(){
+                    return this.aa+this.msg
+                }
+            },
+            watch:{
+                aa:function(){
+                    console.log('gagag')
+                }
+            }
+        })
+    </script>
+
+    
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .red {
+            background: #f00;
+        }
+
+        .show {
+            display: block
+        }
+
+        .hidden {
+            display: none
+        }
+    </style>
+</head>
+
+<body>
+    <div id="qw"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+        class Main extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    list:[
+                        {
+                            id:1,
+                            task:"吃饭",
+                            active:false,
+                            show:true
+                        },
+                        {
+                            id:2,
+                            task:"睡觉",
+                            active:false,
+                            show:true
+                        },
+                        {
+                            id:3,
+                            task:"打游戏",
+                            active:false,
+                            show:true
+                        }
+                    ],
+                    id:4
+                },
+                this.add=this.add.bind(this);
+                this.changeActive=this.changeActive.bind(this);
+                this.del=this.del.bind(this);
+                this.search=this.search.bind(this)
+            }
+            add(val){
+                let arr=this.state.list;
+                arr.push({
+                            id:this.state.id++,
+                            task:val,
+                            active:false
+                })
+                this.setState({
+                    list:arr
+                })
+            }
+            changeActive(index){
+                // 获取到当前list数组
+                let arr = [...this.state.list];
+                // 将数组中索引是index的active取非
+                arr[index].active = !arr[index].active;
+                // 重新赋值给list
+                this.setState({
+                    list:arr
+                },()=>{
+                    console.log(this.state.list)
+                }) 
+            }
+            del(index){
+                let arr=[...this.state.list];
+                arr.splice(index,1);
+                this.setState({
+                    list:arr
+                })
+            }
+            search(val){
+                let list=[...this.state.list]
+                list.forEach((obj)=>{
+                    if(obj.task.includes(val)){
+                        obj.show=true
+                    }
+                    else{
+                        obj.show=false
+                    }
+                })
+                this.setState({
+                    list
+                })
+                console.log(val)
+            }
+            
+            render(){
+                return(
+                    <div>todo
+                    <Children3 search={this.search}></Children3>
+                    <Children1 msg={this.add}></Children1>
+                    <Children2 list={this.state.list} changeActive={this.changeActive} del={this.del}></Children2>
+                    
+                    </div>
+                    
+                )
+            }
+        }
+        class Children1 extends React.Component{
+            render(){
+                return(
+                    <div>
+                    <input type="text" ref="txt"></input>
+                    <button onClick={()=>{
+                        this.props.msg(this.refs.txt.value)
+                    }} >add</button>
+                    </div>
+                )
+            }
+        }
+        class Children3 extends React.Component{
+            render(){
+                return(
+                    <div>
+                    <input type="text" ref="hh"></input>
+                    <button onClick={()=>{
+                        this.props.search(this.refs.hh.value)
+                    } }>搜索</button>
+                    </div>
+
+                )
+            }
+        }
+        class Children2 extends React.Component{
+            render(){
+                return(
+                    
+                    <ul>
+                        {
+                            this.props.list.map((obj,index)=>{
+                                let a=obj.active?"red":"";
+                                let b=obj.show?"show":"hidden";
+                                let cName=a+' '+b;
+                                return(
+                                     <li key={obj.id} className={cName}>
+                                    <input type="checkbox" onClick={()=>{
+                                        this.props.changeActive(index)
+                                    }}/>
+                                    <span>{obj.task}</span>
+                                    <button onClick={()=>{
+                                        this.props.del(index)
+                                    }}>删除</button>
+                                </li>
+                                 )
+
+                            })
+                        }
+                    
+                    </ul>
+                
+                )
+            }
+        }
+        
+
+        ReactDOM.render(
+            <Main></Main>
+            ,document.getElementById('qw')
+        )
+    
+    
+    </script>
+
+
+</body>
+
+</html>

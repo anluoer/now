@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id='qw'></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>//es6转成2es5
+    <script type="text/babel">
+        class Main extends React.Component{
+            constructor(){
+                super();
+                this.state={
+                    list:[
+                        {
+                            id:1,
+                            task:'吃饭',
+                            active:false
+                        },
+                        {
+                            id:2,
+                            task:'睡觉',
+                            active:false
+                        },
+                        {
+                            id:3,
+                            task:'打篮球',
+                            active:false
+                        }
+                        
+                    ]
+                }
+                this.add=this.add.bind(this)
+                console.log(typeof (this.state.list))
+            }
+            //val是子组件input中传来的值
+            add(val){
+                let arr=[...this.state.list];
+                arr.push({
+                    id:this.state.id++,
+                    task:val,
+                    active:false
+                })
+                this.setState={
+                    list:arr
+                }
+            }
+            render(){
+                return(
+                    <div>
+                        <p>todo</p>
+                        <Add add={this.add}></Add>
+                        <Display list={this.state.list}></Display>
+                    </div>
+                )
+            }
+        }
+        class Add extends React.Component{
+            render(){
+                return(
+                    <div>
+                        <input type="text" ref='txt'></input>
+                        <button onClick={()=>{
+                            this.props.add(this.refs.txt.value)}}>Add</button>
+                    </div>
+                )
+            }
+        }
+        //怎么把list中的信息
+        class Display extends React.Component{
+            render(){
+                return(
+                    <ul>{
+                    this.props.list.map((obj,index)=>{
+                       return(
+                            <li key={obj.id}>
+                                <input type="text"></input>
+                                <span>{obj.task}</span>
+                                <button>删除</button>
+                            </li>
+                       )
+                       
+                    })
+                    }  
+                    </ul>)
+                     
+                }
+            }
+        
+        ReactDOM.render(
+            <Main></Main>,
+            document.getElementById('qw')
+        )
+    
+    
+    
+    </script>
+
+
+
+</body>
+</html>

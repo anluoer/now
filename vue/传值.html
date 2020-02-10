@@ -6,16 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        .dialog {
+        #dialog {
             width: 400px;
             height: 300px;
             border: 1px solid #ccc;
             padding: 10px;
         }
-        .dialog-title{
+        #dialog-title{
             border-bottom: 1px solid #ccc
         }
-        .dialog-close{
+        #dialog-close{
             float:right
         }
     
@@ -23,16 +23,16 @@
 </head>
 <body>
         <div id="app">
-                <button @click="loginShow = true">登陆</button>
-                <button @click="regShow = true">注册</button>
-                <my-dialog title="登陆" v-show="loginShow">
+                <button @click="loginShow=true">登陆</button>
+                <button @click="regShow=true">注册</button>
+                <my-dialog title="登陆" v-show="loginShow" >
                     用户名<input type="text">
                     </br>
                     密码：<input type="password">
                     </br>
                     <button>登陆</button>
                 </my-dialog>
-                <my-dialog title="注册" v-show="regShow">
+                <my-dialog title="注册" v-show="regShow" @close=fn>
                     用户名<input type="text">
                     </br>
                     密码：<input type="password">
@@ -43,24 +43,43 @@
                     <button>注册</button>
                 </my-dialog>
             </div>
-    <template class="dialog">
-        <div class="dialog-title"><span>{{title}}</span><span class="dialog-close">X</span></div>
-        <div class="dialog-content">
-            <slot></slot>
+    <template id="temp" >
+        <div id="dialog" v-show="isShow">
+        <div id="dialog-title"><span>{{title}}</span><span id="dialog-close" @click="$emit('close','reg')">X</span></div>
+        <div><slot></slot></div>
         </div>
+           
+        
     </template>
     <script src="vue.js"></script>
     <script>
         new Vue({
             el:"#app",
             data:{
-
+                loginShow:false,
+                regShow:false
+            },
+            methods:{
+                fn(msg){
+                    if(msg=="reg"){
+                        this.regShow=false;
+                    }
+                }
             },
             components:{
                 "myDialog":{
                     template:"#temp",
                     props:["title"],
-
+                    data(){
+                        return{
+                            isShow:true
+                        }
+                    },
+                    methods:{
+                        dialogclose(){
+                            this.isShow=false
+                        }
+                    }
                 }
             }
         })

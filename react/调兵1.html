@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="qw"></div>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 生产环境中不建议使用 -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script type="text/babel">
+            class Main extends React.Component{
+                constructor(){
+                    super();
+                    this.state={
+                        num:100,
+                        numA:100,
+                        numB:100
+                    }
+                    this.change=this.change.bind(this)
+                }
+                change(name,val){
+                    if(this.state.num<val){
+                        alert("士兵数量不足");
+                        return
+                    }
+                    this.setState({
+                        num:this.state.num-val*1,
+                        ['num'+name]:this.state['num'+name]+val*1
+                    })
+                    
+                }
+                
+                render(){
+                    return(
+                    <div>
+                    <h2>剩余将军数量 {this.state.num}</h2>
+                    <Children  name="A" mag={this.state.numA} change={this.change}></Children>
+                    <Children name="B" mag={this.state.numB} change={this.change}></Children>
+                    </div>
+                    )
+                    
+                }
+            }
+            class Children extends React.Component{
+                render(){
+                    return(
+                    <div>
+                        <p>将军{this.props.name}有士兵：{this.props.mag}</p>
+                        <input type="text" ref="name"></input>
+                        <button onClick={()=>{
+                            this.props.change(this.props.name,this.refs.name.value);
+                            }}>调兵</button>
+                    </div>
+                    )
+                    
+                }
+            }
+            
+                
+            
+            ReactDOM.render(
+                <Main></Main>,
+                document.getElementById('qw')
+            )
+        
+        
+        
+        </script>
+</body>
+
+</html>
