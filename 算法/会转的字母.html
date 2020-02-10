@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var str="let's go swimming"
+        // var arr=str.split(" ")
+        
+        //  str2=arr.map(function(val,index){
+        //     //不能用forEach,因为forEach没有返回值
+        //      return str1=val.split("").reverse().join("")
+            
+        // })
+        // console.log(str2.join(" "))  
+            // str2=str.split(" ").map(function(val,index){
+            //     return val.split("").reverse().join("")
+            // }).join(" ")
+
+            // console.log(str2)
+            // \w是字符
+            //match是找到与之匹配的
+            str2=str.match(/[\w']+/g).map(function(val,index){
+                return val.split("").reverse().join("")
+            }).join(" ")
+
+            console.log(str2)
+
+    </script>
+</body>
+</html>
